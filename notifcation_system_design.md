@@ -19,4 +19,21 @@ Stage 1:
             ]
         }
 
-    
+Stage 2: 
+    I suggest MongoDB because it store datas in the form of document type (JSON format).
+    DB schema for notification:
+        const notificationScheme = mongoose.Schema({
+            type:{
+                required: true,
+                type: String,
+            },
+            message:{
+                required: true,
+                type: String,  
+            } 
+        }, { timeStamp: true})
+    When thw data volume increases, the api call data size could increase which may cause a delay.
+    I get offset and pagination in the payload to send the certain amount of datas.
+    I choose NoSql MongoDB.
+
+
