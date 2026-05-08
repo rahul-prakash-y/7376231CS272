@@ -1,7 +1,9 @@
+import './App.css'
 import {Route, BrowserRouter as Router, Routes} from "react-router";
-import { HomePage } from "../pages";
+import { HomePage } from "./page";
 
-export function AppRouter(){
+
+function App(){
     return(
         <Router>
             <Routes >
@@ -10,3 +12,5 @@ export function AppRouter(){
         </Router>
     )
 }
+
+export default App;
