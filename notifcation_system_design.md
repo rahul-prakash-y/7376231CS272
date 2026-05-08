@@ -60,3 +60,9 @@ Stage 3:
     SELECT * FROM notifications
     WHERE studentID = 1042 AND notificationType = "Placement" AND createdAt <= Date.now() - 7
     ORDERBY createdAt ASC;
+
+Stage 4: 
+    The notifications are being fetched on each page load for every student.
+    The DB is getting overwhelmed which is causing a bad user experience.
+    I have a solution to improve the performance by implementing the in memory DB to avoid the data fetching for every student from DB.
+
