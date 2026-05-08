@@ -23,17 +23,40 @@ Stage 2:
     I suggest MongoDB because it store datas in the form of document type (JSON format).
     DB schema for notification:
         const notificationScheme = mongoose.Schema({
-            type:{
+            notificationType:{
                 required: true,
                 type: String,
+                Enums: ["Event", "Result", "Placement"]
             },
             message:{
                 required: true,
                 type: String,  
-            } 
+            },
+            isRead: {
+                type: boolean,
+                required: true,
+                default: true,
+            },
+            studentID:{
+                type: OjectId,
+                required: true
+            }
+
         }, { timeStamp: true})
     When thw data volume increases, the api call data size could increase which may cause a delay.
     I get offset and pagination in the payload to send the certain amount of datas.
     I choose NoSql MongoDB.
 
 
+Stage 3:
+    SELECT * FROM notifications
+    WHERE studentID = 1042 AND isRead = false
+    ORDER BY createdAt ASC;
+
+    This is slow because it fetches all the type of notifications.
+    I change the query to fetch only the required type of notification to decrease the load.
+    Adding indexes on every column advice is effective because we can fetch the data with the index which improves the searching speed.
+
+    SELECT * FROM notifications
+    WHERE studentID = 1042 AND notificationType = "Placement" AND createdAt <= Date.now() - 7
+    ORDERBY createdAt ASC;
