@@ -66,3 +66,20 @@ Stage 4:
     The DB is getting overwhelmed which is causing a bad user experience.
     I have a solution to improve the performance by implementing the in memory DB to avoid the data fetching for every student from DB.
 
+
+Stage 5:
+    async function Notify_all(student,message){
+        for(student_id in student_ids){
+            try{
+                await send_email(student_id,message);
+                await save_to_db(student_id,message);
+                await push_to_app(student_id,message);
+            }
+            catch(error){
+                console.log(error)
+            }
+
+        }
+    }
+
+    
