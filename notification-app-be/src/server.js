@@ -3,6 +3,7 @@ const dotenv = require("dotenv")
 const cors = require("cors")
 const mongoose = require("mongoose")
 const { connectDB } = require("./config/db.js")
+const NotificationsRoute = require("./route/notifications.route.js");
 
 
 const app = express()
@@ -15,14 +16,8 @@ app.use(cors({
 
 app.use(express.json())
 
-app.get("/api", (req,res)=>{
-    try {
-        return res.status(200).json({message:"Hello World"});
-    } catch (error) {
-        console.log("Error while sending : ", error)
-        return res.json({message: error.message})
-    }
-})
+
+app.use("/api", NotificationsRoute);
 
 app.listen(PORT,()=>{
     console.log("Server working on Port ", PORT)
